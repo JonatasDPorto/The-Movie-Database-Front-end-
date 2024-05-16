@@ -26,17 +26,17 @@ class HomePage extends GetView<HomeController> {
                 text: TextSpan(
                   text: 'Welcome.\n',
                   style: GoogleFonts.sourceSans3(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 48,
-                  ),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 48,
+                      color: Colors.white),
                   children: <TextSpan>[
                     TextSpan(
                       text:
                           'Millions of movies, TV shows and people to discover. Explore now.',
                       style: GoogleFonts.sourceSans3(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 32,
-                      ),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 32,
+                          color: Colors.white),
                     ),
                   ],
                 ),
