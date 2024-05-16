@@ -8,15 +8,15 @@ import 'package:the_movie_database_front_end/1_external/datasource/tmdb_datasour
 import 'package:the_movie_database_front_end/2_infra/model/pagination_movie.dart';
 import 'package:the_movie_database_front_end/2_infra/model/person.dart';
 import 'package:the_movie_database_front_end/3_domain/errors/api_execptions.dart';
-import 'reponses/tmdb_popular_response.dart';
-import 'reponses/tmdb_recent_trailer_reponse.dart';
-import 'reponses/tmdb_trending_response.dart';
-import 'reponses/tmdb_upcoming_response.dart';
+import 'responses/tmdb_popular_response.dart';
+import 'responses/tmdb_recent_trailer_reponse.dart';
+import 'responses/tmdb_trending_response.dart';
+import 'responses/tmdb_upcoming_response.dart';
 import 'tmdb_datasource_test.mocks.dart';
-import 'reponses/tmdb_movie_credits_response.dart';
-import 'reponses/tmdb_search_response.dart';
+import 'responses/tmdb_movie_credits_response.dart';
+import 'responses/tmdb_search_response.dart';
 
-class TestAllRoutesForExceptoion {
+class TestAllRoutesForException {
   call<E>(TMDBDatasource datasource) {
     const movieId = 629374;
     const pageNumber = 1;
@@ -164,7 +164,7 @@ void main() {
           ),
         ),
       );
-      TestAllRoutesForExceptoion()<ServiceOfflineException>(datasource);
+      TestAllRoutesForException()<ServiceOfflineException>(datasource);
     });
 
     test("Deve retornar um TMDBException (InternalException)", () async {
@@ -177,7 +177,7 @@ void main() {
           ),
         ),
       );
-      TestAllRoutesForExceptoion()<InternalException>(datasource);
+      TestAllRoutesForException()<InternalException>(datasource);
     });
 
     test("Deve retornar um TMDBException (TimeoutException)", () async {
@@ -190,7 +190,7 @@ void main() {
           ),
         ),
       );
-      TestAllRoutesForExceptoion()<TimeoutException>(datasource);
+      TestAllRoutesForException()<TimeoutException>(datasource);
     });
   });
 }
