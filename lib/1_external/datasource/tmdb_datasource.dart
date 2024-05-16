@@ -18,6 +18,7 @@ class TMDBDatasource extends TMDBDatasourceInterface {
     String apiKey = dotenv.get('TMDB_API_KEY');
 
     var uri = Uri.https('api.themoviedb.org', '/3/movie/$movieId/credits', {
+      'api_key': apiKey,
       'language': 'en-US',
     });
 
@@ -27,7 +28,6 @@ class TMDBDatasource extends TMDBDatasourceInterface {
         validateStatus: (status) => true,
         headers: {
           'accept': 'application/json',
-          'Authorization': 'Bearer $apiKey'
         },
       ),
     );
@@ -47,6 +47,7 @@ class TMDBDatasource extends TMDBDatasourceInterface {
     String apiKey = dotenv.get('TMDB_API_KEY');
 
     var uri = Uri.https('api.themoviedb.org', '/3/movie/popular', {
+      'api_key': apiKey,
       'language': 'en-US',
       'page': pageNumber.toString(),
     });
@@ -57,7 +58,6 @@ class TMDBDatasource extends TMDBDatasourceInterface {
         validateStatus: (status) => true,
         headers: {
           'accept': 'application/json',
-          'Authorization': 'Bearer $apiKey'
         },
       ),
     );
@@ -84,6 +84,7 @@ class TMDBDatasource extends TMDBDatasourceInterface {
     String apiKey = dotenv.get('TMDB_API_KEY');
 
     var uri = Uri.https('api.themoviedb.org', '/3/movie/$movieId/videos', {
+      'api_key': apiKey,
       'language': 'en-US',
     });
 
@@ -93,7 +94,6 @@ class TMDBDatasource extends TMDBDatasourceInterface {
         validateStatus: (status) => true,
         headers: {
           'accept': 'application/json',
-          'Authorization': 'Bearer $apiKey'
         },
       ),
     );
@@ -122,6 +122,7 @@ class TMDBDatasource extends TMDBDatasourceInterface {
     String apiKey = dotenv.get('TMDB_API_KEY');
 
     var uri = Uri.https('api.themoviedb.org', '/3/search/movie', {
+      'api_key': apiKey,
       'query': searchText,
       'language': 'en-US',
       'include_adult': 'false',
@@ -134,7 +135,6 @@ class TMDBDatasource extends TMDBDatasourceInterface {
         validateStatus: (status) => true,
         headers: {
           'accept': 'application/json',
-          'Authorization': 'Bearer $apiKey'
         },
       ),
     );
@@ -160,6 +160,7 @@ class TMDBDatasource extends TMDBDatasourceInterface {
   Future<PaginationMovieEntity> trendingMovies(int pageNumber) async {
     String apiKey = dotenv.get('TMDB_API_KEY');
     var uri = Uri.https('api.themoviedb.org', '/3/trending/movie/day', {
+      'api_key': apiKey,
       'language': 'en-US',
       'page': pageNumber.toString(),
     });
@@ -170,7 +171,6 @@ class TMDBDatasource extends TMDBDatasourceInterface {
         validateStatus: (status) => true,
         headers: {
           'accept': 'application/json',
-          'Authorization': 'Bearer $apiKey'
         },
       ),
     );
@@ -196,6 +196,7 @@ class TMDBDatasource extends TMDBDatasourceInterface {
   Future<PaginationMovieEntity> upcomingMovies(int pageNumber) async {
     String apiKey = dotenv.get('TMDB_API_KEY');
     var uri = Uri.https('api.themoviedb.org', '/3/movie/upcoming', {
+      'api_key': apiKey,
       'language': 'en-US',
       'page': pageNumber.toString(),
     });
@@ -206,7 +207,6 @@ class TMDBDatasource extends TMDBDatasourceInterface {
         validateStatus: (status) => true,
         headers: {
           'accept': 'application/json',
-          'Authorization': 'Bearer $apiKey'
         },
       ),
     );

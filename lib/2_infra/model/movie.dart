@@ -35,14 +35,14 @@ class Movie extends MovieEntity {
 
   factory Movie.fromMap(Map<String, dynamic> map) {
     var _imageURL = ((map['poster_path'] as String?) == null)
-        ? null
+        ? ''
         : 'https://image.tmdb.org/t/p/w300${map['poster_path']}';
     return Movie(
       id: map['id'] as int,
       adult: map['adult'] as bool,
       genreIds: List<int>.from(map['genre_ids']),
       overview: map['overview'] as String,
-      popularity: map['popularity'] as double,
+      popularity: (map['vote_average'] as double) / 10,
       imageURL: _imageURL,
       releaseDate: map['release_date'] as String,
       title: map['title'] as String,

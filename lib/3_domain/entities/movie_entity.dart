@@ -6,7 +6,7 @@ abstract class MovieEntity extends Equatable {
   final List<int> genreIds;
   final String overview;
   final double popularity;
-  final String? imageURL;
+  final String imageURL;
   final String releaseDate;
   final String title;
 
