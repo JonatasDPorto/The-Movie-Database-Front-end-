@@ -2,16 +2,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the_movie_database_front_end/3_domain/entities/movie_entity.dart';
+import 'package:the_movie_database_front_end/4_presenter/view/widgets/user_score.dart';
 import 'package:the_movie_database_front_end/4_presenter/view/widgets/vanishing_horizontal_scrollable.dart';
 
 class MovieHorizontalList extends StatefulWidget {
   final String title;
   final List<MovieEntity> movies;
   final bool showBackground;
+  final void Function(MovieEntity movie) onClick;
   const MovieHorizontalList({
     super.key,
     required this.movies,
     required this.title,
+    required this.onClick,
     this.showBackground = false,
   });
 
@@ -54,111 +57,64 @@ class _MovieHorizontalListState extends State<MovieHorizontalList> {
                   itemBuilder: (ctx, index) {
                     var movie = widget.movies[index];
 
-                    return Column(
-                      children: [
-                        SizedBox(
-                          height: 242,
-                          child: Stack(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: CachedNetworkImage(
-                                    imageUrl: movie.imageURL,
-                                    width: 150,
-                                    height: 225,
-                                    placeholder: (context, url) =>
-                                        const CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 0,
-                                left: 30,
-                                child: Container(
-                                  width: 34,
-                                  height: 34,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    border: Border.all(),
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 0,
-                                left: 30,
-                                child: SizedBox(
-                                  width: 34,
-                                  height: 34,
-                                  child: Center(
-                                    child: SizedBox(
-                                      width: 30,
-                                      height: 30,
-                                      child: CircularProgressIndicator(
-                                        value: movie.popularity,
-                                        strokeWidth: 2,
-                                        color: Color.lerp(
-                                          Colors.red,
-                                          Colors.green,
-                                          movie.popularity,
-                                        ),
-                                      ),
+                    return GestureDetector(
+                      onTap: () => widget.onClick(movie),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 242,
+                            child: Stack(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: CachedNetworkImage(
+                                      imageUrl: movie.imageURL,
+                                      width: 150,
+                                      height: 225,
+                                      placeholder: (context, url) =>
+                                          const CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Positioned(
-                                bottom: 0,
-                                left: 30,
-                                child: SizedBox(
-                                  width: 34,
-                                  height: 34,
-                                  child: Center(
-                                    child: Text(
-                                      (movie.popularity * 100)
-                                          .toStringAsFixed(0),
+                                Positioned(
+                                  bottom: 0,
+                                  left: 30,
+                                  child: UserScore(score: movie.popularity),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: SizedBox(
+                              width: 115,
+                              child: RichText(
+                                text: TextSpan(
+                                  text: '${movie.title}\n',
+                                  style: GoogleFonts.sourceSans3(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 16,
+                                      color: Colors.black),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: movie.releaseDate,
                                       style: GoogleFonts.sourceSans3(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 16,
-                                        color: Colors.white,
+                                        color: Colors.black.withOpacity(0.6),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: SizedBox(
-                            width: 115,
-                            child: RichText(
-                              text: TextSpan(
-                                text: '${movie.title}\n',
-                                style: GoogleFonts.sourceSans3(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 16,
-                                    color: Colors.black),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: movie.releaseDate,
-                                    style: GoogleFonts.sourceSans3(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16,
-                                      color: Colors.black.withOpacity(0.6),
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     );
                   },
                 ),

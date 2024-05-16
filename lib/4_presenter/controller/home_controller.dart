@@ -3,6 +3,7 @@
 import 'package:get/get.dart';
 import 'package:the_movie_database_front_end/1_external/repository/tmdb_repository.dart';
 import 'package:the_movie_database_front_end/3_domain/entities/movie_entity.dart';
+import 'package:the_movie_database_front_end/4_presenter/routes/app_routes.dart';
 import 'package:the_movie_database_front_end/4_presenter/states/tmdb_states.dart';
 
 class HomeController extends GetxController {
@@ -49,5 +50,9 @@ class HomeController extends GetxController {
     } else {
       _popularMoviesState.value = const ErrorState();
     }
+  }
+
+  void openMovieDetailsPage(MovieEntity movie) {
+    Get.toNamed(Routes.MOVIE_DETAILS, arguments: movie);
   }
 }

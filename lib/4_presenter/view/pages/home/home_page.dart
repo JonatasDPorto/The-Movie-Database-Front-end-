@@ -22,7 +22,7 @@ class HomePage extends GetView<HomeController> {
             SearchDiscovery(
               text: RichText(
                 text: TextSpan(
-                  text: 'Bem-vindo(a).\n',
+                  text: 'Welcome.\n',
                   style: GoogleFonts.sourceSans3(
                     fontWeight: FontWeight.w700,
                     fontSize: 48,
@@ -30,7 +30,7 @@ class HomePage extends GetView<HomeController> {
                   children: <TextSpan>[
                     TextSpan(
                       text:
-                          'Milhões de filmes, séries e pessoas para descobrires. Explora já.',
+                          'Millions of movies, TV shows and people to discover. Explore now.',
                       style: GoogleFonts.sourceSans3(
                         fontWeight: FontWeight.w600,
                         fontSize: 32,
@@ -48,12 +48,14 @@ class HomePage extends GetView<HomeController> {
                 title: "Trending",
                 movies: controller.trendingMovies,
                 showBackground: true,
+                onClick: controller.openMovieDetailsPage,
               ),
             ),
             Obx(
               () => MovieHorizontalList(
                 title: "What's Popular",
                 movies: controller.popularMovies,
+                onClick: controller.openMovieDetailsPage,
               ),
             ),
           ],
