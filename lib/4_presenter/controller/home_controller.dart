@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_movie_database_front_end/1_external/repository/tmdb_repository.dart';
 import 'package:the_movie_database_front_end/3_domain/entities/movie_entity.dart';
@@ -13,6 +14,7 @@ class HomeController extends GetxController {
     _readTrending();
     _readPopular();
   }
+  final TextEditingController textEditingController = TextEditingController();
 
   final RxList<MovieEntity> _trendingMovies = <MovieEntity>[].obs;
   List<MovieEntity> get trendingMovies => _trendingMovies.value;
@@ -32,7 +34,11 @@ class HomeController extends GetxController {
     if (paginationOrError.isRight) {
       var movies = paginationOrError.right.movies;
       _trendingMovies.addAll(movies);
-      _trendingMoviesState.value = const SuccessState();
+      if (movies.isEmpty) {
+        _trendingMoviesState.value = const EmptyState();
+      } else {
+        _trendingMoviesState.value = const SuccessState();
+      }
     } else {
       _trendingMoviesState.value = const ErrorState();
     }
@@ -46,7 +52,11 @@ class HomeController extends GetxController {
     if (paginationOrError.isRight) {
       var movies = paginationOrError.right.movies;
       _popularMovies.addAll(movies);
-      _popularMoviesState.value = const SuccessState();
+      if (movies.isEmpty) {
+        _popularMoviesState.value = const EmptyState();
+      } else {
+        _popularMoviesState.value = const SuccessState();
+      }
     } else {
       _popularMoviesState.value = const ErrorState();
     }
@@ -54,5 +64,10 @@ class HomeController extends GetxController {
 
   void openMovieDetailsPage(MovieEntity movie) {
     Get.toNamed(Routes.MOVIE_DETAILS, arguments: movie);
+  }
+
+  void openSearchPage(String text) {
+    if (text.trim().isEmpty) return;
+    Get.toNamed(Routes.SEARCH, arguments: text);
   }
 }

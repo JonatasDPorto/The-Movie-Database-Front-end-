@@ -18,6 +18,7 @@ class ScaffoldAppBar extends StatelessWidget {
                 image: AssetImage('assets/images/logo_mobile.png'),
                 height: 40,
               ),
+              iconTheme: const IconThemeData(color: Colors.white),
             ),
             body: body,
           );
@@ -29,6 +30,7 @@ class ScaffoldAppBar extends StatelessWidget {
               image: AssetImage('assets/images/logo_web.png'),
               height: 20,
             ),
+            automaticallyImplyLeading: false,
           ),
           body: body,
         );

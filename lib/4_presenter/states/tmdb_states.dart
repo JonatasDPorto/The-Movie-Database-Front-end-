@@ -17,3 +17,7 @@ class ErrorState extends TMDBState {
 class SuccessState extends TMDBState {
   const SuccessState();
 }
+
+class EmptyState extends TMDBState {
+  const EmptyState();
+}

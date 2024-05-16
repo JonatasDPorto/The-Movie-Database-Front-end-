@@ -4,14 +4,14 @@ import 'package:the_movie_database_front_end/4_presenter/view/widgets/search_tex
 class SearchDiscovery extends StatelessWidget {
   final RichText text;
   final String assetImagePath;
+  final void Function(String text) onSearch;
   final TextEditingController controller;
-  final void Function() onSearch;
   const SearchDiscovery({
     super.key,
     required this.text,
     required this.assetImagePath,
-    required this.controller,
     required this.onSearch,
+    required this.controller,
   });
 
   @override
@@ -34,8 +34,8 @@ class SearchDiscovery extends StatelessWidget {
               children: [
                 text,
                 SearchTextField(
-                  controller: controller,
                   onPressed: onSearch,
+                  controller: controller,
                 )
               ],
             ),

@@ -120,7 +120,6 @@ class TMDBDatasource extends TMDBDatasourceInterface {
   Future<PaginationMovieEntity> searchMovies(
       String searchText, int pageNumber) async {
     String apiKey = dotenv.get('TMDB_API_KEY');
-
     var uri = Uri.https('api.themoviedb.org', '/3/search/movie', {
       'api_key': apiKey,
       'query': searchText,

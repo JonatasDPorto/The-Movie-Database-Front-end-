@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the_movie_database_front_end/3_domain/entities/person_entity.dart';
+import 'package:the_movie_database_front_end/4_presenter/view/widgets/no_image_widget.dart';
 import 'package:the_movie_database_front_end/4_presenter/view/widgets/vanishing_horizontal_scrollable.dart';
 
 class PersonHorizontalList extends StatefulWidget {
@@ -17,6 +18,14 @@ class PersonHorizontalList extends StatefulWidget {
 
 class _PersonHorizontalListState extends State<PersonHorizontalList> {
   final ScrollController controller = ScrollController();
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(milliseconds: 300)).then((value) =>
+        controller.animateTo(10,
+            duration: const Duration(microseconds: 300), curve: Curves.ease));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,10 +82,10 @@ class _PersonHorizontalListState extends State<PersonHorizontalList> {
                                     width: 140,
                                     height: 175,
                                     fit: BoxFit.cover,
-                                    placeholder: (context, url) =>
-                                        const CircularProgressIndicator(),
+                                    placeholder: (context, url) => const Center(
+                                        child: CircularProgressIndicator()),
                                     errorWidget: (context, url, error) =>
-                                        const Icon(Icons.error),
+                                        const NoImageWidget(),
                                   ),
                                 ),
                                 Padding(

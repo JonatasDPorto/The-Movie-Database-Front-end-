@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the_movie_database_front_end/3_domain/entities/movie_entity.dart';
+import 'package:the_movie_database_front_end/4_presenter/view/widgets/no_image_widget.dart';
 import 'package:the_movie_database_front_end/4_presenter/view/widgets/user_score.dart';
 import 'package:the_movie_database_front_end/4_presenter/view/widgets/vanishing_horizontal_scrollable.dart';
 
@@ -24,6 +25,14 @@ class MovieHorizontalList extends StatefulWidget {
 
 class _MovieHorizontalListState extends State<MovieHorizontalList> {
   final ScrollController controller = ScrollController();
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(milliseconds: 300)).then((value) =>
+        controller.animateTo(10,
+            duration: const Duration(microseconds: 300), curve: Curves.ease));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +83,11 @@ class _MovieHorizontalListState extends State<MovieHorizontalList> {
                                       width: 150,
                                       height: 225,
                                       placeholder: (context, url) =>
-                                          const CircularProgressIndicator(),
+                                          const Center(
+                                              child:
+                                                  CircularProgressIndicator()),
                                       errorWidget: (context, url, error) =>
-                                          const Icon(Icons.error),
+                                          const NoImageWidget(),
                                     ),
                                   ),
                                 ),
@@ -93,6 +104,7 @@ class _MovieHorizontalListState extends State<MovieHorizontalList> {
                             child: SizedBox(
                               width: 115,
                               child: RichText(
+                                maxLines: 4,
                                 text: TextSpan(
                                   text: '${movie.title}\n',
                                   style: GoogleFonts.sourceSans3(

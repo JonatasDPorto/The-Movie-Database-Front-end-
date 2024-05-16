@@ -38,7 +38,11 @@ class MovieDetailsController extends GetxController {
     if (personsOrError.isRight) {
       var p = personsOrError.right;
       _persons.addAll(p);
-      _personsState.value = const SuccessState();
+      if (p.isEmpty) {
+        _personsState.value = const EmptyState();
+      } else {
+        _personsState.value = const SuccessState();
+      }
     } else {
       _personsState.value = const ErrorState();
     }
