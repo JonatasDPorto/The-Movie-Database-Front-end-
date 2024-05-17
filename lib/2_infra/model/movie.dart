@@ -42,7 +42,7 @@ class Movie extends MovieEntity {
       adult: map['adult'] as bool,
       genreIds: List<int>.from(map['genre_ids']),
       overview: map['overview'] as String,
-      popularity: (map['vote_average'] as double) / 10,
+      popularity: (map['vote_average'] ?? 0) / 10.0,
       imageURL: _imageURL,
       releaseDate: map['release_date'] as String,
       title: map['title'] as String,
